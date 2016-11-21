@@ -30,7 +30,6 @@ class EscaparateController extends AppController {
     		Flash::valid('Sitio fue activado exitosamente');    		
     	}
     	return Redirect::to();
-    	
     }
 
 }
