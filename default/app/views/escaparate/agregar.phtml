@@ -1,0 +1,53 @@
+<!-- FEATURED HERE -->
+
+<article>
+    <div class="row">
+        <div class="span12">
+            <h3>Agregar un sitio</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span8">
+        <?= Form::openMultipart();?>
+        
+        <fieldset>
+        <legend>Datos del Sitio</legend>
+        	<label>Url:</label><br/>
+	        <?= Form::text('web.url', 'required="required" placeholder="http://" size="60"');?><br/>
+	        
+	        <label>País:</label><br/>
+	        <?= Form::select('web.pais', Web::getPaises(), 'required="required"');?><br/>
+	        
+	        <label>Descripción:</label><br/>
+	        <?= Form::textarea('web.descripcion');?><br/>
+	        
+	        <label>Imagen:</label><br/>
+	        <?= Form::file('imagenweb', 'required="required"') ?><br/>
+	        <small>(jpg y png son aceptados, tamaño de archivo menor a 75kb, 690px de ancho por 450px alto preferentemente)</small>
+	        
+        </fieldset>
+        
+        <fieldset>
+        <legend>Datos del Autor</legend>
+	        
+	        <label>Su nombre:</label><br/>
+	        <?= Form::text('autor.nombre', 'required="required"');?><br/>
+	        
+	        <label>Correo:</label><br/>
+	        <?= Form::text('autor.email', 'required="required"');?><br/>
+	        
+	        <!-- socializable : opcional -->
+	        <?php foreach(Web::getSocializables() as $social): ?>
+		        <label><?=$social?></label><br/>
+		        <?= Form::text('social[' . $social . ']');?><br/>
+	        <?php endforeach;?>
+	        <!-- fin de socializable -->
+	        
+	        <label>País:</label><br/>
+	        <?= Form::select('autor.pais', Web::getPaises(), 'required="required"');?><br/>
+        </fieldset>
+        <?= Form::submit('Enviar', 'class="btn btn-success"')?>
+        <?= Form::close();?>
+        </div>
+    </div>
+</article>

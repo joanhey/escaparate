@@ -1,0 +1,19 @@
+<div class="content">
+    <?php View::content(); ?>
+    <h3>Tags</h3>
+
+    <?= Html::linkAction('agregar', 'Agregar'); ?>
+
+    <ul>
+        <?php foreach ($tags->items as $tag) : ?>
+            <li>
+                <?php echo Html::linkAction("editar/$tag->id/", 'Editar') ?>
+                <?php echo Html::linkAction("borrar/$tag->id/", 'Borrar') ?>
+                <strong><?php echo $tag->nombre ?></strong>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+
+    <?php if ($tags->prev) echo Html::linkAction("index/$tags->prev/", '<< Anterior |'); ?>
+    <?php if ($tags->next) echo Html::linkAction("index/$tags->next/", 'Próximo >>'); ?>
+</div>

@@ -1,0 +1,99 @@
+<!-- FEATURED HERE -->
+<article>
+    <div class="row">
+        <div class="span9">
+            <h3>Webs Creadas con KumbiaPHP Framework</h3>
+        </div>
+        <div class="span3">
+        	<?= Html::linkAction('agregar', 'Agregar', 'class="btn btn-success"');?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span8 text-center">		
+            <div class="image-box box-grey">
+                <span class="btn btn-default btn-block">Web destacada</span>
+                <?= Html::img('web/website-' . $featured->id . ".png", ""); ?>	
+            </div>	
+        </div>
+        <div class="span4">
+            <div class="image-box box-grey">
+                <h3 class="box-header"><a href="#"><?= $featured->url; ?></a></h3>						
+                <div class="row">
+                    <div class="span9">
+                        <strong>Autor:</strong> <?= $featured->getAutor()->nombre;?>
+                        <br/>
+                        <strong>País:</strong> <?= $featured->getAutor()->pais;?>
+                    </div>
+                    <div class="span3">
+                        <?= Html::gravatar($featured->getAutor()->email, "", "class='box'"); ?>	
+                    </div>
+                </div>
+                <?php if (count($featured->getAutor()->getAutorSocial()) > 0) { ?>
+                <div class="row">
+                    <h4 class="box-header">Contacto</h4>
+                    <table>
+                        <?php foreach($featured->getAutor()->getAutorSocial() as $item): ?>
+                        <tr>
+                            <td>
+                                <a class="social <?= strtolower($item->socialname);?>" href="#"></a>
+                            </td>
+                            <td>
+                                <?= $item->cuenta;?>
+                            </td>
+                        </tr>
+                        <?php endforeach;?>                        
+                    </table>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</article>
+<!-- OTHERS -->
+<section class="row">
+    <div class="span9">
+        <div class="row">
+            <div class="span4 text-center">
+                <?= Html::img('web/default.jpeg', "", "class='image-box box-grey'"); ?>
+                <a href="#" class="btn-block">www.demo.com</a>
+                <small>Desarrollador por: <a href="#">Kumbiero</a></small>
+            </div>
+            <div class="span4 text-center">
+                <?= Html::img('web/default.jpeg', "", "class='image-box box-grey'"); ?>
+                <a href="#" class="btn-block">www.demo.com</a>
+                <small>Desarrollador por: <a href="#">Kumbiero</a></small>
+            </div>
+            <div class="span4 text-center">
+                <?= Html::img('web/default.jpeg', "", "class='image-box box-grey'"); ?>
+                <a href="#" class="btn-block">www.demo.com</a>
+                <small>Desarrollador por: <a href="#">Kumbiero</a></small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span4 text-center">
+                <?= Html::img('web/default.jpeg', "", "class='image-box box-grey'"); ?>
+                <a href="#" class="btn-block">www.demo.com</a>
+                <small>Desarrollador por: <a href="#">Kumbiero</a></small>
+            </div>
+            <div class="span4 text-center">
+                <?= Html::img('web/default.jpeg', "", "class='image-box box-grey'"); ?>
+                <a href="#" class="btn-block">www.demo.com</a>
+                <small>Desarrollador por: <a href="#">Kumbiero</a></small>
+            </div>
+            <div class="span4 text-center">
+                <?= Html::img('web/default.jpeg', "", "class='image-box box-grey'"); ?>
+                <a href="#" class="btn-block">www.demo.com</a>
+                <small>Desarrollador por: <a href="#">Kumbiero</a></small>
+            </div>
+        </div>
+    </div>
+    <aside class="span3">				
+        <ul>
+            <li><a href="#">Tag 1</a></li>
+            <li><a href="#">Tag 2</a></li>
+            <li><a href="#">Tag 3</a></li>
+            <li><a href="#">Tag 4</a></li>
+            <li><a href="#">Tag 5</a></li>
+        </ul>		
+    </aside>
+</section>
