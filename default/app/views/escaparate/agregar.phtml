@@ -3,7 +3,7 @@
 <article>
     <div class="row">
         <div class="span12">
-            <h3>Agregar un sitio</h3>
+            <h3><?= _("Agregar un sitio");?></h3>
         </div>
     </div>
     <div class="row">
@@ -11,29 +11,29 @@
         <?= Form::openMultipart();?>
         
         <fieldset>
-        <legend>Datos del Sitio</legend>
-        	<label>Url:</label><br/>
+        <legend><?= _("Datos del Sitio");?></legend>
+        	<label><?= _("Url");?>:</label><br/>
 	        <?= Form::text('web.url', 'required="required" placeholder="http://" size="60"');?><br/>
 	        
-	        <label>País:</label><br/>
+	        <label><?= _("País");?>:</label><br/>
 	        <?= Form::select('web.pais', Web::getPaises(), 'required="required"');?><br/>
 	        
-	        <label>Descripción:</label><br/>
+	        <label><?= _("Descripción");?>:</label><br/>
 	        <?= Form::textarea('web.descripcion');?><br/>
 	        
-	        <label>Imagen:</label><br/>
+	        <label><?= _("Imagen");?>:</label><br/>
 	        <?= Form::file('imagenweb', 'required="required"') ?><br/>
-	        <small>(jpg y png son aceptados, tamaño de archivo menor a 75kb, 690px de ancho por 450px alto preferentemente)</small>
+	        <small>(<?= _("jpg y png son aceptados, tamaño de archivo menor a 75kb, 690px de ancho por 450px alto preferentemente");?>)</small>
 	        
         </fieldset>
         
         <fieldset>
-        <legend>Datos del Autor</legend>
+        <legend><?= _("Datos del Autor");?></legend>
 	        
-	        <label>Su nombre:</label><br/>
+	        <label><?= _("Su nombre");?>:</label><br/>
 	        <?= Form::text('autor.nombre', 'required="required"');?><br/>
 	        
-	        <label>Correo:</label><br/>
+	        <label><?= _("Correo");?>:</label><br/>
 	        <?= Form::text('autor.email', 'required="required"');?><br/>
 	        
 	        <!-- socializable : opcional -->
@@ -43,10 +43,10 @@
 	        <?php endforeach;?>
 	        <!-- fin de socializable -->
 	        
-	        <label>País:</label><br/>
+	        <label><?= _("País");?>:</label><br/>
 	        <?= Form::select('autor.pais', Web::getPaises(), 'required="required"');?><br/>
         </fieldset>
-        <?= Form::submit('Enviar', 'class="btn btn-success"')?>
+        <?= Form::submit(_("Enviar"), 'class="btn btn-success"')?>
         <?= Form::close();?>
         </div>
     </div>

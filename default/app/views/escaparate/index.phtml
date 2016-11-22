@@ -2,16 +2,16 @@
 <article>
     <div class="row">
         <div class="span9">
-            <h3>Webs Creadas con KumbiaPHP Framework</h3>
+            <h3><?= _("Webs Creadas con KumbiaPHP Framework"); ?></h3>
         </div>
         <div class="span3">
-        	<?= Html::linkAction('agregar', 'Agregar', 'class="btn btn-success"');?>
+        	<?= Html::linkAction('agregar', _("Agregar"), 'class="btn btn-success"');?>
         </div>
     </div>
     <div class="row">
         <div class="span8 text-center">		
             <div class="image-box box-grey">
-                <span class="btn btn-default btn-block">Web destacada</span>
+                <span class="btn btn-default btn-block"><?= _("Web destacada");?></span>
                 <?= Html::img('web/website-' . $featured->id . ".png", ""); ?>	
             </div>	
         </div>
@@ -20,9 +20,9 @@
                 <h3 class="box-header"><a href="#"><?= $featured->url; ?></a></h3>						
                 <div class="row">
                     <div class="span9">
-                        <strong>Autor:</strong> <?= $featured->getAutor()->nombre;?>
+                        <strong><?= _("Autor");?>:</strong> <?= $featured->getAutor()->nombre;?>
                         <br/>
-                        <strong>País:</strong> <?= $featured->getAutor()->pais;?>
+                        <strong><?= _("País");?>:</strong> <?= $featured->getAutor()->pais;?>
                     </div>
                     <div class="span3">
                         <?= Html::gravatar($featured->getAutor()->email, "", "class='box'"); ?>	
@@ -30,7 +30,7 @@
                 </div>
                 <?php if (count($featured->getAutor()->getAutorSocial()) > 0) { ?>
                 <div class="row">
-                    <h4 class="box-header">Contacto</h4>
+                    <h4 class="box-header"><?= _("Contacto");?></h4>
                     <table>
                         <?php foreach($featured->getAutor()->getAutorSocial() as $item): ?>
                         <tr>
@@ -89,11 +89,9 @@
     </div>
     <aside class="span3">				
         <ul>
-            <li><a href="#">Tag 1</a></li>
-            <li><a href="#">Tag 2</a></li>
-            <li><a href="#">Tag 3</a></li>
-            <li><a href="#">Tag 4</a></li>
-            <li><a href="#">Tag 5</a></li>
+            <?php foreach((new Tags)->distinct("tag") as $tag): ?>
+            <li><a href="#"><?= $tag;?></a></li>
+            <?php endforeach; ?>
         </ul>		
     </aside>
 </section>
