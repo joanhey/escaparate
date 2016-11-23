@@ -94,11 +94,13 @@ class Web extends ActiveRecord {
         $autor->create();
         
         $web = new Web($web);
+        
         $web->autor_id = $autor->id;
         $web->create();
         
         $this->sube_fichero($web->id);
-        $this->crea_thumb($web->id);        
+        $extension = $this->dame_extension();
+        $this->crea_thumb($web->id.$extension);        
         
         if (count($social) > 0) {
             foreach ($social as $key => $value):
@@ -127,7 +129,7 @@ class Web extends ActiveRecord {
         $path = "img/web/upload/";
         $archivo->setExtensions(array('jpg', 'png', 'gif')); //le asignamos las extensiones a permitir
         $archivo->setPath($path);
-        
+       
         if ($archivo->save($grafico)) {           
             return 'ok';
         } else {
@@ -139,7 +141,23 @@ class Web extends ActiveRecord {
      * Crea y sube el thumb de una imagen
      */
     public function crea_thumb($fichero) {
+        Load::lib('resize');
         
+        $foto = new thumbnail('img/web/upload/'.$fichero);
+        $foto->size_width(150);
+        $foto->jpeg_quality(70);
+        $foto->save('img/web/upload/thumb/'.$fichero);
         
+        return;
     }
+    
+    /**
+     * Nos devuelve la extensión del archivo pasado en el $_FILES
+     */
+    public function dame_extension() {
+        $datos = explode('.', $_FILES['imagenweb']['name']);
+
+        return $datos[1];
+    }
+
 }

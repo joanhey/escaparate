@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-11-2016 a las 18:57:47
+-- Tiempo de generación: 23-11-2016 a las 18:38:05
 -- Versión del servidor: 5.7.16-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.8-0ubuntu0.16.04.3
 
@@ -41,7 +41,17 @@ CREATE TABLE `autor` (
 
 INSERT INTO `autor` (`id`, `nombre`, `email`, `pais`, `creado_at`, `actualizado_in`) VALUES
 (4, 'Nelson Rojas', 'nelson.rojas.n@gmail.com', 'Chile', '2016-11-21 09:09:17', '2016-11-21 11:11:50'),
-(5, 'María Isabel Núñez', 'mariaisabelnunez@hotmail.com', 'Chile', '2016-11-21 09:15:51', NULL);
+(5, 'María Isabel Núñez', 'mariaisabelnunez@hotmail.com', 'Chile', '2016-11-21 09:15:51', NULL),
+(6, 'asdsad', 'asdasdasd', 'Aruba', '2016-11-23 16:43:33', NULL),
+(7, 'qwe', 'qwe', 'Bahamas', '2016-11-23 16:56:56', NULL),
+(8, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:03:35', NULL),
+(9, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:04:21', NULL),
+(10, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:05:02', NULL),
+(11, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:07:41', NULL),
+(12, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:11:08', NULL),
+(13, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:11:31', NULL),
+(14, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:11:43', NULL),
+(15, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:36:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -104,17 +114,21 @@ CREATE TABLE `web` (
   `descripcion` tinytext,
   `activa` tinyint(4) DEFAULT '0',
   `creado_at` timestamp NULL DEFAULT NULL,
-  `actualizado_in` timestamp NULL DEFAULT NULL
+  `actualizado_in` timestamp NULL DEFAULT NULL,
+  `grafico` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `web`
 --
 
-INSERT INTO `web` (`id`, `url`, `destacada`, `autor_id`, `pais`, `descripcion`, `activa`, `creado_at`, `actualizado_in`) VALUES
-(3, 'www.natures.cl', 1, 4, 'Chile', 'Sitio web dedicado a la venta de productos y servicios de área de la salud alternativa, incluyendo un blog', 1, '2016-11-21 09:09:17', '2016-11-21 09:11:25'),
-(4, 'www.planetamamá.com', NULL, 5, 'Chile', 'Sitio web dedicado a la información y venta de productos didácticos para niños', 1, '2016-11-21 09:15:51', '2016-11-21 09:16:16'),
-(5, 'www.isabilia.com', NULL, 4, 'Chile', 'Sitio de emprendimiento y contacto personal', 0, '2016-11-21 11:11:50', NULL);
+INSERT INTO `web` (`id`, `url`, `destacada`, `autor_id`, `pais`, `descripcion`, `activa`, `creado_at`, `actualizado_in`, `grafico`) VALUES
+(3, 'www.natures.cl', 1, 4, 'Chile', 'Sitio web dedicado a la venta de productos y servicios de área de la salud alternativa, incluyendo un blog', 1, '2016-11-21 09:09:17', '2016-11-21 09:11:25', ''),
+(4, 'www.planetamamá.com', NULL, 5, 'Chile', 'Sitio web dedicado a la información y venta de productos didácticos para niños', 1, '2016-11-21 09:15:51', '2016-11-21 09:16:16', ''),
+(5, 'www.isabilia.com', NULL, 4, 'Chile', 'Sitio de emprendimiento y contacto personal', 0, '2016-11-21 11:11:50', NULL, ''),
+(6, 'sdfsdf', NULL, 6, 'Africa del Sur', 'sdasdasd', 0, '2016-11-23 16:43:33', NULL, ''),
+(7, 'qwreqw', NULL, 7, 'Africa del Sur', 'qweqw', 0, '2016-11-23 16:56:56', NULL, ''),
+(8, 'qwreqw', NULL, 15, 'Africa del Sur', 'qweqw', 0, '2016-11-23 17:36:06', NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -163,7 +177,7 @@ ALTER TABLE `web`
 -- AUTO_INCREMENT de la tabla `autor`
 --
 ALTER TABLE `autor`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `autor_social`
 --
@@ -183,7 +197,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT de la tabla `web`
 --
 ALTER TABLE `web`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Restricciones para tablas volcadas
 --
