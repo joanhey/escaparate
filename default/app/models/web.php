@@ -86,31 +86,30 @@ class Web extends ActiveRecord {
     
     
     public function crear($web, $autor, $social) {
+        $web = Input::post('web');
+        $autor = Input::post('autor');
+        $social = Input::post('social');
         
-        $this->begin();
-        try {
-            $autor = new Autor($autor);
-            $autor->create();
-            $this->sube_fichero();
-            $web = new Web($web);
-            $web->autor_id = $autor->id;
-            $web->create();
-            $this->sube_fichero();
-            
-            (new Imagen)->generar($web->id);
-
-            if (count($social) > 0) {
-                foreach ($social as $key => $value):
+        $autor = new Autor($autor);
+        $autor->create();
+        
+        $web = new Web($web);
+        $web->autor_id = $autor->id;
+        $web->create();
+        
+        $this->sube_fichero($web->id);
+        $this->crea_thumb($web->id);        
+        
+        if (count($social) > 0) {
+            foreach ($social as $key => $value):
+                if ($value) {
                     (new AutorSocial)->create(array('socialname' => $key, 'cuenta' => $value, 'autor_id' => $autor->id));
-                endforeach;
-            }
-
-            $this->commit();
-            return true;
-        } catch (Exception $ex) {
-            $this->rollback();
-            return false;
+                }
+            endforeach;
         }
+
+        $this->commit();
+        return true;
     }
 
     public function activar($id)
@@ -123,15 +122,13 @@ class Web extends ActiveRecord {
     /**
      * Sube un fichero al servidor
      */
-    public function sube_fichero() {
+    public function sube_fichero($grafico) {
         $archivo = Upload::factory('imagenweb', 'image');
         $path = "img/web/upload/";
         $archivo->setExtensions(array('jpg', 'png', 'gif')); //le asignamos las extensiones a permitir
         $archivo->setPath($path);
-        $nombre = explode('.', $$_FILES['imagenweb']['name']);
-        $nombre = $nombre[1];
         
-        if ($archivo->save($nombre)) {           
+        if ($archivo->save($grafico)) {           
             return 'ok';
         } else {
             return 'ko';
@@ -140,23 +137,9 @@ class Web extends ActiveRecord {
     
     /**
      * Crea y sube el thumb de una imagen
-     * 
-     * @param string $fichero Ruta completa del fichero a redimensionar
-     * @return string ok->correcto ko->error
      */
     public function crea_thumb($fichero) {
-        Load::lib('resize');
-        $path = 'img/web/upload/';
-        $pathtumb = 'img/web/upload/thumb/';
-
-        $foto = new thumbnail($path.$fichero);
-        $foto->size_width(150);
-        $foto->jpeg_quality(70);
         
-        if ($foto->save($pathtumb.$fichero)){
-            return 'ok';
-        } else {
-            return 'ko';
-        }
+        
     }
 }

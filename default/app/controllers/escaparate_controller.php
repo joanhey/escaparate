@@ -14,7 +14,8 @@ class EscaparateController extends AppController {
     
     function agregar() {
         if (Input::hasPost('web', 'autor')) {
-            if ((new Web)->crear(Input::post('web'), Input::post('autor'), Input::post('social'))) {
+            //if ((new Web)->crear(Input::post('web'), Input::post('autor'), Input::post('social'))) {
+            if ((new Web)->crear()) {
                 Flash::valid('Sitio agregado exitosamente');
                 return Redirect::to();
             } else {
