@@ -85,40 +85,88 @@ class Web extends ActiveRecord {
     }
     
     
-    public function crear($web, $autor, $social)
-    {
-    	
-    	$this->begin();
-    	try {
-    		$autor = new Autor($autor);
-    		$autor->create();
-    		
-    		$web = new Web($web);
-    		$web->autor_id = $autor->id;
-    		$web->create();    		
-    		
-    		(new Imagen)->generar($web->id);
-    		
-    		if (count($social) > 0 ) {
-    			foreach($social as $key => $value):
-    				(new AutorSocial)->create(array('socialname'=>$key, 'cuenta' => $value, 'autor_id' => $autor->id));
-    			endforeach;
-    		}
-    		
-    		$this->commit();
-    		return true;
-    		
-    	} catch(Exception $ex) {
-    		$this->rollback();
-    		return false;
-    	}
-    	
+    public function crear($web, $autor, $social) {
+        $web = Input::post('web');
+        $autor = Input::post('autor');
+        $social = Input::post('social');
+
+        $autor = new Autor($autor);
+        $autor->create();
+
+        $web = new Web($web);
+
+        $fichero = $this->sube_fichero();
+
+        if ($fichero) { // Si se ha subido correctamente
+            $this->crea_thumb($fichero); // Creo el thumb
+            $web->autor_id = $autor->id;
+            $web->grafico = $fichero;
+
+            $web->create();
+
+            if (count($social) > 0) {
+                foreach ($social as $key => $value):
+                    if ($value) {
+                        (new AutorSocial)->create(array('socialname' => $key, 'cuenta' => $value, 'autor_id' => $autor->id));
+                    }
+                endforeach;
+            }
+
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
-    
+
     public function activar($id)
     {
     	$web = $this->find_first($id);
     	$web->activa = 1;
     	return ($web->save());
     }
+    
+    /**
+     * Sube un fichero al servidor
+     */
+    public function sube_fichero() {
+        $fichero = rand() . '_' . $_FILES['imagenweb']['name'];
+        $nombre = explode('.', $fichero);
+        $nombre = $nombre[0];
+         
+        $archivo = Upload::factory('imagenweb', 'image');
+        $path = "img/web/upload/";
+        $archivo->setExtensions(array('jpg', 'png', 'gif')); //le asignamos las extensiones a permitir
+        $archivo->setPath($path);
+        
+        
+        if ($archivo->save($nombre)) {           
+            return $fichero;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    /**
+     * Crea y sube el thumb de una imagen
+     */
+    public function crea_thumb($fichero) {
+        Load::lib('resize');
+        
+        $foto = new thumbnail('img/web/upload/'.$fichero);
+        $foto->size_width(200);
+        $foto->jpeg_quality(70);
+        $foto->save('img/web/upload/thumb/'.$fichero);
+        
+        return;
+    }
+    
+    /**
+     * Nos devuelve la extensión del archivo pasado en el $_FILES
+     */
+    public function dame_extension() {
+        $datos = explode('.', $_FILES['imagenweb']['name']);
+
+        return $datos[1];
+    }
+
 }
