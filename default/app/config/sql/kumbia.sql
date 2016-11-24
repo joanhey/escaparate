@@ -2,10 +2,10 @@
 -- version 4.6.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 23-11-2016 a las 18:38:05
--- Versión del servidor: 5.7.16-0ubuntu0.16.04.1
--- Versión de PHP: 7.0.8-0ubuntu0.16.04.3
+-- Host: localhost
+-- Generation Time: Nov 24, 2016 at 05:49 PM
+-- Server version: 5.7.16-0ubuntu0.16.04.1
+-- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `escaparate`
+-- Database: `escaparate`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `autor`
+-- Table structure for table `autor`
 --
 
 CREATE TABLE `autor` (
@@ -36,27 +36,18 @@ CREATE TABLE `autor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `autor`
+-- Dumping data for table `autor`
 --
 
 INSERT INTO `autor` (`id`, `nombre`, `email`, `pais`, `creado_at`, `actualizado_in`) VALUES
 (4, 'Nelson Rojas', 'nelson.rojas.n@gmail.com', 'Chile', '2016-11-21 09:09:17', '2016-11-21 11:11:50'),
 (5, 'María Isabel Núñez', 'mariaisabelnunez@hotmail.com', 'Chile', '2016-11-21 09:15:51', NULL),
-(6, 'asdsad', 'asdasdasd', 'Aruba', '2016-11-23 16:43:33', NULL),
-(7, 'qwe', 'qwe', 'Bahamas', '2016-11-23 16:56:56', NULL),
-(8, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:03:35', NULL),
-(9, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:04:21', NULL),
-(10, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:05:02', NULL),
-(11, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:07:41', NULL),
-(12, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:11:08', NULL),
-(13, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:11:31', NULL),
-(14, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:11:43', NULL),
-(15, 'qwe', 'qwe', 'Bahamas', '2016-11-23 17:36:06', NULL);
+(16, 'Pepe Conserva', 'pepe@pepe.com', 'Argentina', '2016-11-24 16:43:28', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `autor_social`
+-- Table structure for table `autor_social`
 --
 
 CREATE TABLE `autor_social` (
@@ -68,16 +59,17 @@ CREATE TABLE `autor_social` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `autor_social`
+-- Dumping data for table `autor_social`
 --
 
 INSERT INTO `autor_social` (`id`, `socialname`, `autor_id`, `cuenta`, `creado_at`) VALUES
-(3, 'Twitter', 4, '@nelsonrojas', '2016-11-21 11:11:50');
+(3, 'Twitter', 4, '@nelsonrojas', '2016-11-21 11:11:50'),
+(4, 'Facebook', 16, 'https://www.facebook.com/groups/90246423597/', '2016-11-24 16:43:28');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tagged`
+-- Table structure for table `tagged`
 --
 
 CREATE TABLE `tagged` (
@@ -90,7 +82,7 @@ CREATE TABLE `tagged` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tags`
+-- Table structure for table `tags`
 --
 
 CREATE TABLE `tags` (
@@ -102,7 +94,7 @@ CREATE TABLE `tags` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `web`
+-- Table structure for table `web`
 --
 
 CREATE TABLE `web` (
@@ -119,29 +111,27 @@ CREATE TABLE `web` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `web`
+-- Dumping data for table `web`
 --
 
 INSERT INTO `web` (`id`, `url`, `destacada`, `autor_id`, `pais`, `descripcion`, `activa`, `creado_at`, `actualizado_in`, `grafico`) VALUES
 (3, 'www.natures.cl', 1, 4, 'Chile', 'Sitio web dedicado a la venta de productos y servicios de área de la salud alternativa, incluyendo un blog', 1, '2016-11-21 09:09:17', '2016-11-21 09:11:25', ''),
 (4, 'www.planetamamá.com', NULL, 5, 'Chile', 'Sitio web dedicado a la información y venta de productos didácticos para niños', 1, '2016-11-21 09:15:51', '2016-11-21 09:16:16', ''),
 (5, 'www.isabilia.com', NULL, 4, 'Chile', 'Sitio de emprendimiento y contacto personal', 0, '2016-11-21 11:11:50', NULL, ''),
-(6, 'sdfsdf', NULL, 6, 'Africa del Sur', 'sdasdasd', 0, '2016-11-23 16:43:33', NULL, ''),
-(7, 'qwreqw', NULL, 7, 'Africa del Sur', 'qweqw', 0, '2016-11-23 16:56:56', NULL, ''),
-(8, 'qwreqw', NULL, 15, 'Africa del Sur', 'qweqw', 0, '2016-11-23 17:36:06', NULL, NULL);
+(9, 'www.webdepruebas.com', NULL, 16, 'Africa del Sur', 'Esta es una web muy chula, que todabía no está hecha, pero estará.', 0, '2016-11-24 16:43:28', NULL, '1803398829_aaa.png');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `autor`
+-- Indexes for table `autor`
 --
 ALTER TABLE `autor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `autor_social`
+-- Indexes for table `autor_social`
 --
 ALTER TABLE `autor_social`
   ADD PRIMARY KEY (`id`),
@@ -149,7 +139,7 @@ ALTER TABLE `autor_social`
   ADD KEY `fk_social_a_autor_social` (`socialname`);
 
 --
--- Indices de la tabla `tagged`
+-- Indexes for table `tagged`
 --
 ALTER TABLE `tagged`
   ADD PRIMARY KEY (`id`),
@@ -157,60 +147,60 @@ ALTER TABLE `tagged`
   ADD KEY `fk_web_a_tagged` (`web_id`);
 
 --
--- Indices de la tabla `tags`
+-- Indexes for table `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `web`
+-- Indexes for table `web`
 --
 ALTER TABLE `web`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_autor_a_web` (`autor_id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `autor`
+-- AUTO_INCREMENT for table `autor`
 --
 ALTER TABLE `autor`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
--- AUTO_INCREMENT de la tabla `autor_social`
+-- AUTO_INCREMENT for table `autor_social`
 --
 ALTER TABLE `autor_social`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT de la tabla `tagged`
+-- AUTO_INCREMENT for table `tagged`
 --
 ALTER TABLE `tagged`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `tags`
+-- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `web`
+-- AUTO_INCREMENT for table `web`
 --
 ALTER TABLE `web`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `tagged`
+-- Constraints for table `tagged`
 --
 ALTER TABLE `tagged`
   ADD CONSTRAINT `fk_tag_a_tagged` FOREIGN KEY (`tags_id`) REFERENCES `tags` (`id`),
   ADD CONSTRAINT `fk_web_a_tagged` FOREIGN KEY (`web_id`) REFERENCES `web` (`id`);
 
 --
--- Filtros para la tabla `web`
+-- Constraints for table `web`
 --
 ALTER TABLE `web`
   ADD CONSTRAINT `fk_autor_a_web` FOREIGN KEY (`autor_id`) REFERENCES `autor` (`id`);
