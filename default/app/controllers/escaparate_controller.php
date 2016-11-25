@@ -27,7 +27,7 @@ class EscaparateController extends AppController {
     function autorizar($id)
     {
     	if ((new Web)->activar($id)) {
-    		Flash::valid('Sitio fue activado exitosamente');    		
+    		Flash::valid(_('Sitio fue activado exitosamente'));    		
     	}
     	return Redirect::to();
     }

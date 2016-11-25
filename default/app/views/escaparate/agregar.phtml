@@ -1,0 +1,53 @@
+<!-- FEATURED HERE -->
+
+<article>
+    <div class="row">
+        <div class="span12">
+            <h3><?= _("Agregar un sitio");?></h3>
+        </div>
+    </div>
+    <?= Form::openMultipart();?>
+    <div class="row">
+        <div class="span7">
+            <fieldset>
+            <legend><?= _("Datos del Sitio");?></legend>
+                <label><?= _("Url");?>:</label><br/>
+                <?= Form::text('web.url', 'required="required" placeholder="http://" size="60"');?><br/>
+                
+                <label><?= _("País");?>:</label><br/>
+                <?= Form::select('web.pais', Web::getPaises(), 'required="required"');?><br/>
+                
+                <label><?= _("Descripción");?>:</label><br/>
+                <?= Form::textarea('web.descripcion');?><br/>
+                
+                <label><?= _("Imagen");?>:</label><br/>
+                <?= Form::file('imagenweb', 'required="required"') ?><br/>
+                <small>(<?= _("jpg y png son aceptados, tamaño de archivo menor a 75kb, 690px de ancho por 450px alto preferentemente");?>)</small>
+                
+            </fieldset>
+       </div>
+       <div class="span5">     
+            <fieldset>
+            <legend><?= _("Datos del Autor");?></legend>
+                
+                <label><?= _("Su nombre");?>:</label><br/>
+                <?= Form::text('autor.nombre', 'required="required"');?><br/>
+                
+                <label><?= _("Correo");?>:</label><br/>
+                <?= Form::text('autor.email', 'required="required"');?><br/>
+                
+                <!-- socializable : opcional -->
+                <?php foreach(Web::getSocializables() as $social): ?>
+                    <label><?=$social?></label><br/>
+                    <?= Form::text('social[' . $social . ']');?><br/>
+                <?php endforeach;?>
+                <!-- fin de socializable -->
+                
+                <label><?= _("País");?>:</label><br/>
+                <?= Form::select('autor.pais', Web::getPaises(), 'required="required"');?><br/>
+            </fieldset>                            
+        </div>
+        <?= Form::submit(_("Enviar"), 'class="btn btn-success"')?>
+    </div>
+    <?= Form::close();?>
+</article>
