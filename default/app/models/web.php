@@ -153,7 +153,7 @@ class Web extends ActiveRecord {
         Load::lib('resize');
         
         $foto = new thumbnail('img/web/upload/'.$fichero);
-        $foto->size_width(200);
+        $foto->size_width(300);
         $foto->jpeg_quality(70);
         $foto->save('img/web/upload/thumb/'.$fichero);
         
@@ -169,4 +169,12 @@ class Web extends ActiveRecord {
         return $datos[1];
     }
 
+    /**
+     * Nos devuelve todas las web activas, paginadas, ordenadas por fecha de alta
+     * 
+     * @param integere $page
+     */
+    public function dame_todas_paginadas($page){
+        return $this->paginate("page: $page", "per_page: 12", 'order: creado_at DESC', 'activa=1');
+    }
 }
