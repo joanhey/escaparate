@@ -321,3 +321,7 @@ blockquote {
 .btn-block {
     display: block;
 }
+
+.thumb {
+    height: 120px;
+}

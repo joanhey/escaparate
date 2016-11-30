@@ -6,10 +6,15 @@ class EscaparateController extends AppController {
         View::template('proto');
     }
 
-    function index() {
+    function index($page =null) {
+        if (!$page){
+            $page = 1;
+        }
+        
         $this->featured = (new Web)->getFeatured();
         $this->webs = (new Web)->find();
         $this->tags = (new Tags)->find();
+        $this->listado = (new Web())->dame_todas_paginadas($page);
     }
     
     function agregar() {
