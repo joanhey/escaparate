@@ -6,20 +6,16 @@ class EscaparateController extends AppController {
         View::template('proto');
     }
 
-    function index($page =null) {
-        if (!$page){
-            $page = 1;
-        }
+    function index($page = 1) {
         
         $this->featured = (new Web)->getFeatured();
         $this->webs = (new Web)->find();
-        $this->tags = (new Tags)->find();
+        $this->tags = (new Categoria)->find();
         $this->listado = (new Web())->dame_todas_paginadas($page);
     }
     
     function agregar() {
         if (Input::hasPost('web', 'autor')) {
-            //if ((new Web)->crear(Input::post('web'), Input::post('autor'), Input::post('social'))) {
             if ((new Web)->crear()) {
                 Flash::valid(_('Sitio agregado exitosamente.'));
                 return Redirect::to();

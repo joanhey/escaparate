@@ -1,5 +1,6 @@
 <!-- FEATURED HERE -->
 <article>
+    <header>
     <div class="row">
         <div class="span9">
             <h3>Webs Creadas con KumbiaPHP Framework</h3>
@@ -8,71 +9,72 @@
             <?= Html::linkAction('agregar', 'Agregar', 'class="btn btn-success"'); ?>
         </div>
     </div>
+  </header>
+  <section id="web-list">
+    <div class="row">
+        <?php foreach ($listado->items as $l) { ?>
+            <div class="span3 text-center">
+                <div class="thumb">
+                    <?php
+                    $grafico = PUBLIC_PATH . UPLOAD_IMAGE_PATH . "thumb/no.jpg";
+                    if ($l->grafico) {
+                      $grafico = PUBLIC_PATH . UPLOAD_IMAGE_PATH . "thumb/" . $l->grafico;
+                    }
+                    ?>
+                    <img src="<?= $grafico;?>" class="img-web" width="100%" />
+                </div>
+                <br/>
+                <div class="center">
+                    <a href="http://<?= $l->url ?>" target="_blank" data-id="<?= $l->id;?>" class="btn-block btn-preview"><?= $l->url ?></a>
+                    <small>Desarrollador por: <strong><?= $l->getAutor()->nombre ?></strong></small>
+                    <?= Html::gravatar($l->getAutor()->email, "", "class='box' id='user-img-{$l->id}'"); ?>
+                    <?= Form::hidden('web-' . $l->id, false, json_encode(
+                        array(
+                          'url'=>$l->url,
+                          'autor' => $l->getAutor()->nombre,
+                          'categoria' => $l->categoria_id ? $l->getCategoria()->nombre : _("Sin Categoría"),
+                          'imagen' => PUBLIC_PATH . UPLOAD_IMAGE_PATH . $l->grafico,
+                          'pais' => $l->pais))); ?>
+                </div>
+                <br/>
+            </div>
+        <?php } ?>
+    </div>
+    <footer>
+      <div class="row">
+        <div class="span12"><?= View::partial('paginators/punbb', false, array('page' => $listado, 'show' => 10, 'url' => "usuarios/index"))?></div>
+      </div>
+    </footer>
+  </section>
+  <section id="particular-web" class="hidden">
     <div class="row">
         <div class="span8 text-center">
             <div class="image-box box-grey">
-                <span class="btn btn-default btn-block">Web destacada</span>
-                <?= Html::img('web/website-' . $featured->id . ".png", ""); ?>
+                <span class="btn btn-default btn-block" id="web-header"></span>
+                <img id="site-image" src="" />
             </div>
         </div>
         <div class="span4">
             <div class="image-box box-grey">
-                <h3 class="box-header"><a href="#"><?= $featured->url; ?></a></h3>
+                <h3 class="box-header"><a id="site-url" href="#" target="_blank" title="Visitar Sitio"></a></h3>
                 <div class="row">
                     <div class="span9">
-                        <strong>Autor:</strong> <?= $featured->getAutor()->nombre; ?>
+                        <strong><?= _("Categoría")?>:</strong> <span id="web-category"></span>
                         <br/>
-                        <strong>País:</strong> <?= $featured->getAutor()->pais; ?>
+                        <strong><?= _("País")?>:</strong> <span id="country-name"></span>
+                        <br/>
+                        <strong><?= _("Autor")?>:</strong> <span id="author-name"></span>
+                        <br/>
+                        <a href="#" class="btn btn-primary btn-part-close"><?= _("Volver"); ?></a>
                     </div>
-                    <div class="span3">
-                        <?= Html::gravatar($featured->getAutor()->email, "", "class='box'"); ?>
+                    <div class="span3" id="user-picture">
+
                     </div>
                 </div>
-                <?php if (count($featured->getAutor()->getAutorSocial()) > 0) { ?>
-                    <div class="row">
-                        <h4 class="box-header">Contacto</h4>
-                        <table>
-                            <?php foreach ($featured->getAutor()->getAutorSocial() as $item): ?>
-                                <tr>
-                                    <td>
-                                        <a class="social <?= strtolower($item->socialname); ?>" href="#"></a>
-                                    </td>
-                                    <td>
-                                        <?= $item->cuenta; ?>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </table>
-                    </div>
-                <?php } ?>
             </div>
         </div>
     </div>
+  <section>
+
 </article>
 <!-- OTHERS -->
-
-<div class="row">
-    <?php foreach ($listado->items as $l) { ?>
-        <div class="span3 text-center">
-            <div class="thumb">
-                <?php
-                    if ($l->grafico) {
-                        echo Html::img("web/upload/thumb/$l->grafico", 'img-web', 'width="100%"');
-                    } else {
-                        echo Html::img("web/upload/thumb/no.jpg", 'img-web');
-                    }
-                ?>
-            </div>
-            <br/>
-            <div class="center">
-                <a href="http://<?= $l->url ?>" target="_blank" class="btn-block"><?= $l->url ?></a>
-                <small>Desarrollador por: <strong><?= (new Autor())->dame_autor($l->autor_id) ?></strong></small>
-            </div>
-            <br/>
-        </div>
-    <?php } ?>
-</div>
-
-<div class="row">
-<div class="span12"><?= View::partial('paginators/punbb', false, array('page' => $listado, 'show' => 10, 'url' => "usuarios/index"))?></div>
-</div>

@@ -1,4 +1,5 @@
 <!-- FEATURED HERE -->
+<?= View::partial('form_utils');?>
 
 <article>
     <div class="row">
@@ -14,11 +15,14 @@
                 <label><?= _("Url");?>:</label><br/>
                 <?= Form::text('web.url', 'required="required" placeholder="http://" size="60"');?><br/>
                 
-                <label><?= _("País");?>:</label><br/>
-                <?= Form::select('web.pais', Web::getPaises(), 'required="required"');?><br/>
+                <label><?= _("País");?>:</label><br/>                
+                <?= Form::select('web.pais', getPaises(), 'required="required"'); ?><br/>
                 
                 <label><?= _("Descripción");?>:</label><br/>
                 <?= Form::textarea('web.descripcion');?><br/>
+
+                <label><?= _("Categoría");?>:</label><br/>
+                <?= Form::dbSelect('web.categoria_id');?><br/>
                 
                 <label><?= _("Imagen");?>:</label><br/>
                 <?= Form::file('imagenweb', 'required="required"') ?><br/>
@@ -37,14 +41,14 @@
                 <?= Form::text('autor.email', 'required="required"');?><br/>
                 
                 <!-- socializable : opcional -->
-                <?php foreach(Web::getSocializables() as $social): ?>
+                <?php foreach(getSocializable() as $social): ?>
                     <label><?=$social?></label><br/>
                     <?= Form::text('social[' . $social . ']');?><br/>
                 <?php endforeach;?>
                 <!-- fin de socializable -->
                 
                 <label><?= _("País");?>:</label><br/>
-                <?= Form::select('autor.pais', Web::getPaises(), 'required="required"');?><br/>
+                <?= Form::select('autor.pais', getPaises(), 'required="required"'); ?><br/>
             </fieldset>                            
         </div>
         <?= Form::submit(_("Enviar"), 'class="btn btn-success"')?>

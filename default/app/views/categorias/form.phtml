@@ -1,0 +1,22 @@
+<!-- FEATURED HERE -->
+
+<article>
+    <div class="row">
+        <div class="span12">
+            <h3><?= _(ucfirst($action_name) . " categoría");?></h3>
+        </div>
+    </div>
+    <?= Form::open();?>
+    <div class="row">
+        <div class="span7">
+            <fieldset>            
+                <label><?= _("Nombre");?>:</label><br/>
+                <?= Form::text('categoria.nombre', 'required="required" size="40"');?><br/>                
+            </fieldset>
+       </div>
+        <?= Form::hidden('categoria.id'); ?>
+        <?= Form::submit(_("Enviar"), 'class="btn btn-success"')?>
+    </div>
+    <?= Form::close();?>
+</article>
+

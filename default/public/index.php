@@ -85,6 +85,8 @@ define('PUBLIC_PATH', substr(urldecode($_SERVER['REQUEST_URI']), 0, -$number));
  */
 $url = empty($_SERVER['PATH_INFO']) ? '/' : $_SERVER['PATH_INFO'];
 
+define('UPLOAD_IMAGE_PATH', 'img/web/upload/');
+
 /**
  * Carga el gestor de arranque
  * Por defecto el bootstrap del core
