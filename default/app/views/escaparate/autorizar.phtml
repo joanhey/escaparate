@@ -1,0 +1,36 @@
+<!-- FEATURED HERE -->
+<article>
+    <header>
+    <div class="row">
+        <div class="span9">
+            <h3>Webs Pendientes de autorizar</h3>
+        </div>
+    </div>
+  </header>
+  <section id="web-list">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>url</th>
+          <th>categoria</th>
+          <th>autor</th>
+          <th>opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($listado as $l): ?>
+          <tr>
+            <td><?= $l->id;?></td>
+            <td><?= $l->url;?></td>
+            <td><?= $l->categoria_id ? $l->getCategoria()->nombre : 'Sin categoría';?></td>
+            <td><?= $l->autor_id ? $l->getAutor()->nombre : 'Sin autor';?></td>
+            <td>
+              <?= Html::linkAction('autorizar/' . $l->id, 'Autorizar'); ?>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      <tbody>
+    </table>
+  </section>
+</article>

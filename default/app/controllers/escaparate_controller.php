@@ -7,16 +7,12 @@ class EscaparateController extends AppController {
     }
 
     function index($page = 1) {
-        
-        $this->featured = (new Web)->getFeatured();
-        $this->webs = (new Web)->find();
-        $this->tags = (new Categoria)->find();
         $this->listado = (new Web())->dame_todas_paginadas($page);
     }
-    
+
     function agregar() {
         if (Input::hasPost('web', 'autor')) {
-            if ((new Web)->crear()) {
+            if ((new Site)->addNew(Input::post('web'), Input::post('autor'), Input::post('social'), $_FILES['imagenweb'])) {
                 Flash::valid(_('Sitio agregado exitosamente.'));
                 return Redirect::to();
             } else {
@@ -25,12 +21,18 @@ class EscaparateController extends AppController {
         }
     }
 
-    function autorizar($id)
+    function autorizar($id = null)
     {
-    	if ((new Web)->activar($id)) {
-    		Flash::valid(_('Sitio fue activado exitosamente'));    		
-    	}
-    	return Redirect::to();
+      if ($id == null) {
+        $this->listado = (new Web)->find("conditions: activa = 0"); // elementos pendientes
+      } else {
+        if ((new Web)->activar($id)) {
+      		Flash::valid(_('Sitio fue activado exitosamente'));
+          return Redirect::to();
+      	}
+      }
+
+
     }
 
 }
