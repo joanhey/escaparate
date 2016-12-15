@@ -13,7 +13,7 @@
             <fieldset>
             <legend><?= _("Datos del Sitio");?></legend>
                 <label><?= _("Url");?>:</label><br/>
-                <?= Form::text('web.url', 'required="required" placeholder="http://" size="60"');?><br/>
+                <?= Form::text('web.url', 'required="required" placeholder="http://" size="40"');?><br/>
                 
                 <label><?= _("País");?>:</label><br/>                
                 <?= Form::select('web.pais', getPaises(), 'required="required"'); ?><br/>
